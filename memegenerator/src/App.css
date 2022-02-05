@@ -1,0 +1,42 @@
+*{
+  margin: 0px;
+}
+
+body{
+  font-family: 'Karla', sans-serif;
+}
+
+.navcss{
+  background: linear-gradient(to bottom, #2193b0 0%, #6dd5ed 100%);
+}
+
+.nav--logo{
+  height: 80px;
+}
+
+.nav--text{
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.form--input{
+  margin: 5px 0px;
+  border-radius: 8px;
+}
+
+.form--btn{
+  margin-top: 10px;
+  margin-left: 25%;
+  width: 50%;
+  background: linear-gradient(to bottom, #2193b0 0%, #6dd5ed 100%);
+  border: none;
+  padding: 10px 0px;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.glyph-top{
+  vertical-align: bottom;
+   font-size: 24px !important;
+}
