@@ -3,12 +3,23 @@ import memesData from '../data/memesData'
 
 export default function Meme() {
     
-    const [memeImage, setMemeImage] = useState("")
+    // const [memeImage, setMemeImage] = useState("https://i.imgflip.com/30b1gx.jpg")
 
+    const[meme, setMeme] = useState({
+        topText:"",
+        bottomText:"",
+        randomImage:"https://i.imgflip.com/30b1gx.jpg"
+    })
+
+    const [allMemeImage, setAllMemeImage] = useState(memesData)
     function getMemeImage(){
-        const memesArray = memesData.data.memes
+        const memesArray = allMemeImage.data.memes
         const randomNumber = Math.floor(Math.random() * memesArray.length)
-        setMemeImage(memesArray[randomNumber].url)
+        const url = memesArray[randomNumber].url
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            randomImage: url
+        }))
     }
 
     return (
@@ -26,7 +37,7 @@ export default function Meme() {
         <div className='row'>
                 <button className="form--btn text-center" onClick={getMemeImage}>Get a new Image <i className='material-icons glyph-top'>face</i></button>
         </div>
-        <img src={memeImage} alt="" className='mx-auto d-block meme--image'/>
+        <img src={meme.randomImage} alt="" className='mx-auto d-block meme--image'/>
     </main>
   );
 }
