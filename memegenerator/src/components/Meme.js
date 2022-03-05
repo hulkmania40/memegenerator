@@ -1,18 +1,21 @@
-import React, {useState} from 'react';
-import memesData from '../data/memesData'
+import React, {useState, useEffect} from 'react';
 import '../Meme.css'
 
 export default function Meme() {
     
-    // const [memeImage, setMemeImage] = useState("https://i.imgflip.com/30b1gx.jpg")
-
     const[meme, setMeme] = useState({
         topText:"",
         bottomText:"",
         randomImage:"https://i.imgflip.com/30b1gx.jpg"
     })
 
-    const [allMemeImage, setAllMemeImage] = useState(memesData)
+    const [allMemes, setAllMemes] = useState([])
+
+    useEffect(()=>{
+        fetch("https://api.imgflip.com/get_memes")
+        .then(res=>res.json())
+        .then(data=> setAllMemes(data.data.memes))
+    },[])
 
     function handleChange(event){
         const {name,value} = event.target
@@ -23,9 +26,8 @@ export default function Meme() {
     }
 
     function getMemeImage(){
-        const memesArray = allMemeImage.data.memes
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-        const url = memesArray[randomNumber].url
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
         setMeme(prevMeme => ({
             ...prevMeme,
             randomImage: url
@@ -45,9 +47,8 @@ export default function Meme() {
             </div>
         </div>
         <div className='row'>
-                <button className="form--btn text-center" onClick={getMemeImage}>Get a new Image <i className='material-icons glyph-top'>face</i></button>
+            <button className="form--btn text-center" onClick={getMemeImage}>Get a new Image <i className='material-icons glyph-top'>face</i></button>
         </div>
-            {/* <img src={meme.randomImage} alt="" className='mx-auto d-block meme--image'/> */}
             <div className="meme">
                 <img src={meme.randomImage} className="mx-auto d-block meme--image" alt="" />
                 <h2 className="meme--text top">{meme.topText}</h2>
